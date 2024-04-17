@@ -18,6 +18,7 @@ class ExeRunner:
         current_dir = os.path.dirname(current_file)
         
         prompt = input(f"""
+-----------------
 Run an Executable
 -----------------
 Enter the file path to an executable as well as any command line arguments
@@ -29,7 +30,10 @@ Or leave blank to run 'tmp/example.exe'
         if prompt:
             self.cmdline = prompt
             self.cmd = self.cmdline.split()
-            self.name = re.search(r'[^\\/]+$', self.cmd[0]).group()
+            try:
+                self.name = re.search(r'[^\\/]+$', self.cmd[0]).group()
+            except:
+                self.name = prompt
     
     def run_exe(self):
         def _thread_exe():
@@ -39,7 +43,8 @@ Or leave blank to run 'tmp/example.exe'
                 row = f"\n{timestamp},{self.username},{process.pid},{self.name},{self.cmdline},,,,,"
                 log_activity(row)
             except Exception as e:
-                print(f"Unble to run '{self.cmdline}' with errors:", e)
+                print(f"Unable to run '{self.cmdline}' with errors:", e)
 
         exe_thread = threading.Thread(target=_thread_exe)
         exe_thread.start()
+        exe_thread.join()

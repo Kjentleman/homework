@@ -14,9 +14,6 @@ class NetworkRunner:
         process = psutil.Process(self.pid)
         self.pname = process.name()
         self.cmdline = " ".join(process.cmdline())
-
-    def setup_post_bin():
-        pass
     
     def transmit_data(self):
         host = 'jsonplaceholder.typicode.com'

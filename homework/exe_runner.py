@@ -1,7 +1,6 @@
 import getpass
 import os
 import psutil
-import re
 import subprocess
 import sys
 import time
@@ -13,7 +12,8 @@ class ExeRunner:
         if sys.platform == 'win32':
             self.cmdline = 'tmp/example.exe'
         else:
-            self.cmdline = 'chmod +x tmp/example.app'
+            # self.cmdline = 'chmod +x tmp/example.app'
+            self.cmdline = 'tmp/example.app'
 
     def run_exe(self):
         current_file = os.path.abspath(__file__)
@@ -30,8 +30,10 @@ Or leave blank to run '{self.cmdline}'
         if prompt: self.cmdline = prompt
 
         try:
+            cmd = self.cmdline.split(' ')
+            if sys.platform != 'win32': cmd = ['open', '-a'] + self.cmdline.split(' ')
             timestamp = time.time()
-            process = subprocess.Popen(self.cmdline.split(' '))
+            process = subprocess.Popen(cmd)
             pname = psutil.Process(process.pid).name()
             row = f"\n{timestamp},{self.username},{process.pid},{pname},{self.cmdline},,,,,"
             log_activity(row)

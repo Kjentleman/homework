@@ -1,10 +1,6 @@
 timestamp,username,pid,process_name,command_line,file_path,descriptor,source,payload,protocol
-1713556008.884959,dankjellerson,12778,open,tmp/example.app,,,,,
-1713556040.8954182,dankjellerson,12802,open,/Applications/Spotify.app,,,,,
-1713556248.760143,dankjellerson,12878,open,tmp/example.app,,,,,
-1713556387.050996,dankjellerson,12980,open,/Users/dankjellerson/dev/python/homework/tmp/example.app,,,,,
-1713556407.431039,dankjellerson,13000,open,tmp/example.app,,,,,
-1713556421.072438,dankjellerson,13025,open,/tmp/example.app,,,,,
-1713556439.4094028,dankjellerson,13047,open,tmp//example.app,,,,,
-1713556586.225947,dankjellerson,13091,open,/Applications/Spotify.app,,,,,
-1713556708.639692,dankjellerson,13131,open,tmp/example.app,,,,,
+1713557222.7037416,Daniel Kjellerson,14312,example.exe,tmp/example.exe,,,,,
+1713557223.6527312,Daniel Kjellerson,23944,,C:\Users\Daniel Kjellerson\AppData\Local\Microsoft\WindowsApps\python3.exe homework,B:\dev\homework\tmp\file.txt,create,,,
+1713557224.5014665,Daniel Kjellerson,23944,,C:\Users\Daniel Kjellerson\AppData\Local\Microsoft\WindowsApps\python3.exe homework,B:\dev\homework\tmp\file.txt,modified,,,
+1713557225.000705,Daniel Kjellerson,23944,,C:\Users\Daniel Kjellerson\AppData\Local\Microsoft\WindowsApps\python3.exe homework,B:\dev\homework\tmp\file.txt,delete,,,
+1713557225.7895384,Daniel Kjellerson,23944,python3.12.exe,C:\Users\Daniel Kjellerson\AppData\Local\Microsoft\WindowsApps\python3.exe homework,,,10.5.0.2:65342,685,HTTPS

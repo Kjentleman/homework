@@ -17,12 +17,10 @@ class FileRunner:
 
     def create_file(self):
         prompt = input(f"""
--------------
-Create a file
--------------
-Enter the path to the file to create
+CREATE FILE
+Enter the path to a file to create
 Example: 'your/file/path/file.csv'
-For reference your current directory is: {self.current_dir}
+For reference the current directory is: {self.current_dir}
 Or leave blank to create the file 'tmp/file.exe'
 > """)
         
@@ -43,16 +41,11 @@ Or leave blank to create the file 'tmp/file.exe'
     def modify_file(self):
         if not os.path.exists(self.file_path):
             print(f"""
------------
-Modify file
------------
 Unable to modify file. Cannot find {self.file_path}""")
             return None
 
         prompt = input(f"""
------------
-Modify file
------------
+MODIFY FILE
 Modifying {self.file_path}
 Enter the text you would like to replace the file contents
 > """)
@@ -66,12 +59,11 @@ Enter the text you would like to replace the file contents
             print("Unable to modify file with error:", e)
 
     def delete_file(self):
-        print(f"""
--------------
-Deleting file
--------------
-Deleting {self.file_path}
-""")
+        _ = input(f"""
+DELETE FILE
+Deleting '{self.file_path}'
+Enter to continue
+> """)
         try:
             os.remove(self.file_path)
             timestamp = time.time()

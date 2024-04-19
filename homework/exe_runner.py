@@ -1,9 +1,8 @@
-import os
 import getpass
+import os
 import re
-import time
 import subprocess
-import threading
+import time
 from logger import log_activity
 
 class ExeRunner:
@@ -11,19 +10,17 @@ class ExeRunner:
         self.username = getpass.getuser()
         self.cmdline = 'tmp/example.exe'
         self.cmd = ['tmp/example.exe']
-        self.name = 'example.exe'
+        self.pname = 'example.exe'
 
-    def prompt(self):
+    def run_exe(self):
         current_file = os.path.abspath(__file__)
         current_dir = os.path.dirname(current_file)
         
         prompt = input(f"""
------------------
-Run an Executable
------------------
+RUN EXECUTABLE
 Enter the file path to an executable as well as any command line arguments
 Example: 'your/file/path/example.exe -f ENV=dev'
-For reference your current directory is: {current_dir}
+For reference the current directory is: {current_dir}
 Or leave blank to run 'tmp/example.exe'
 > """)
         
@@ -31,20 +28,17 @@ Or leave blank to run 'tmp/example.exe'
             self.cmdline = prompt
             self.cmd = self.cmdline.split()
             try:
-                self.name = re.search(r'[^\\/]+$', self.cmd[0]).group()
+                self.pname = re.search(r'[^\\/]+$', self.cmd[0]).group()
             except:
-                self.name = prompt
-    
-    def run_exe(self):
-        def _thread_exe():
-            try:
-                timestamp = time.time()
-                process = subprocess.Popen(self.cmd)
-                row = f"\n{timestamp},{self.username},{process.pid},{self.name},{self.cmdline},,,,,"
-                log_activity(row)
-            except Exception as e:
-                print(f"Unable to run '{self.cmdline}' with errors:", e)
+                self.pname = prompt
 
-        exe_thread = threading.Thread(target=_thread_exe)
-        exe_thread.start()
-        exe_thread.join()
+        try:
+            timestamp = time.time()
+            process = subprocess.Popen(self.cmd)
+            row = f"\n{timestamp},{self.username},{process.pid},{self.pname},{self.cmdline},,,,,"
+            log_activity(row)
+        except Exception as e:
+            print(f"Unable to run '{self.cmdline}' with errors:", e)
+        finally:
+            process.terminate()
+            process.wait()

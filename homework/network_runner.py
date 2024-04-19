@@ -1,9 +1,10 @@
 import getpass
 import http.client
-import time
+import json
 import os
 import psutil
-import json
+import ssl
+import time
 from logger import log_activity
 
 class NetworkRunner:
@@ -18,13 +19,15 @@ class NetworkRunner:
         pass
     
     def transmit_data(self):
-        file_path = 'tmp/lorem_ipsum.txt'
         host = 'jsonplaceholder.typicode.com'
         path = '/posts'
         headers = {
             "Content-type": "application/json; charset=UTF-8",
         }
-        conn = http.client.HTTPSConnection(host)
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+        conn = http.client.HTTPSConnection(host, context=context)
         body = json.dumps({
             "userId": 3,
             "title": "Lorem ipsum",

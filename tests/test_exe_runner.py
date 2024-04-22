@@ -14,7 +14,7 @@ class TestExeRunner(unittest.TestCase):
         if sys.platform == 'win32':
             self.assertEqual(runner.cmdline, 'tmp/example.exe')
         else:
-            self.assertEqual(runner.cmdline, 'chmod +x tmp/example.app')
+            self.assertEqual(runner.cmdline, 'tmp/example.app')
 
     @patch('builtins.input', return_value='')
     def test_run_exe(self, _):
@@ -24,7 +24,7 @@ class TestExeRunner(unittest.TestCase):
         regex = rf"""^\d+\.\d+,             # timestamp
             {re.escape(runner.username)},   # username
             \d+,                            # pid
-            (chmod|example\.exe),           # process name
+            (open|example\.exe),            # process name
             {re.escape(runner.cmdline)},    # command line
             ,                               # file path
             ,                               # descriptor
